@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>id_create</title>
+</head>
+<body>
+<input type="button" value="button" id="createId">
+<script type="text/javascript" src="index.js"></script>
+<script type="text/javascript" src="../dist/hashids.js"></script>
+<script>
+function getUniqueId(){
+  const id2 = new Date().getTime().toString()  + Math.floor(Math.random() * 3).toString();
+//   var hashids = new Hashids('salt', 8, '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+    var hashids = new Hashids('salt', 8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+    id = hashids.encode(id2),
+    numbers = hashids.decode(id);
+    return [id,id2];
+}
+</script>
+</body>
+</html>

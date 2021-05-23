@@ -1,0 +1,62 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" context="text/html; charset=UTF-8" />
+  <meta charset="UTF-8" />
+  <title>JavaScriptでコラッツ予想</title>
+</head>
+<body>
+
+<h2>コラッツ予想</h2>
+
+<ul>
+<li>1〜999にて検証</li>
+<li>「偶数なら2で割り、奇数なら3倍して1を足す」という操作を繰り返す</li>
+<li>1になったら終了し次の数値検証</li>
+</ul>
+
+4桁 まで
+<!--↓数値入力で検証を行う場合に使用-->
+<!--<input type="text" id="N1" value="" maxlength="4" size="7" oninput="value = value.replace(/[^0-9]+/i,'');" />-->
+<input type="button" value="計算スタート" onclick="collatzConjectureTest()" /><br />
+<br />
+
+<textarea id="result" rows="50" col="20" style="width:100%;height:100%;">
+</textarea>
+
+<script>
+
+async function collatzConjectureTest(){
+    console.log("start!!");
+    let i = null;
+    let ns = [];
+    for(i = 2; i < 1000; i++ ){
+        // console.log('ここ？',i);
+        await doCalc(i,ns);
+
+    }
+}
+
+function doCalc(n,ns) {
+    // ↓数値入力で検証を行う場合に使用
+    // let n = document.getElementById('N1');
+ 
+    let n2 = n;
+    while(1){
+        if(n2 % 2 == 0){
+            n2 = n2 /2;
+        }
+        else{
+            n2 = n2 * 3 + 1
+        }
+        if(n2 < 2){
+            ns.push(n+'='+n2)
+            document.getElementById('result').innerHTML = ns.join("\n");
+            break;
+        }
+        
+    }
+}
+</script>
+
+</body>
+</html>
