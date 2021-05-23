@@ -41,6 +41,7 @@ function doCalc(n,ns) {
     // let n = document.getElementById('N1');
  
     let n2 = n;
+    let count = 0;
     while(1){
         if(n2 % 2 == 0){
             n2 = n2 /2;
@@ -53,7 +54,11 @@ function doCalc(n,ns) {
             document.getElementById('result').innerHTML = ns.join("\n");
             break;
         }
-        
+        count++;
+        if(count > 10000){
+            //無限ループ回避用
+            break;
+        }
     }
 }
 </script>
