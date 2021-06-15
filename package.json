@@ -1,0 +1,25 @@
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "description": "javascript ├── defaultvalue ....................... フォームのスペースの即時トリム",
+  "main": "sum.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m-watari/javascript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/m-watari/javascript/issues"
+  },
+  "homepage": "https://github.com/m-watari/javascript#readme",
+  "devDependencies": {
+    "jest": "^27.0.4"
+  }
+}
