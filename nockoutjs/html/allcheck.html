@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="content-style-type" content="text/css">
+  <meta http-equiv="content-script-type" content="text/javascript">
+  <script src="../js/require-config.js"></script>
+  <script data-main="../js/allcheck-main.js" src="../js/lib/require.js"></script>
+  <link rel="stylesheet" href="../css/common.css">
+  <title>toggle select all checkboxes</title>
+</head>
+<body>
+  <section>
+    <h1>toggle select all checkboxes</h1>
+
+    <input type="checkbox" data-bind="checked: toggleAll" /> Toggle All<br/>
+    <ul data-bind="foreach: items">
+      <li>
+        <input type="checkbox" data-bind="checked: checked" />
+        <span data-bind="text: name"></span>
+      </li>
+    </ul>
+  </section>
+</body>
+</html>

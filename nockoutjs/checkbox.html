@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <form>
+        <h1>配列とcheckedをバインド</h1>
+        <input type="checkbox" data-bind="checked: toggleAll" /> Toggle All<br/>
+        <ul data-bind="foreach: items">
+        <li>
+            <input type="checkbox" data-bind="checked: checked" />
+            <span data-bind="text: name"></span>
+        </li>
+        </ul>
+    </form>
+    <script type="text/javascript" src="knockout-3.5.1.js"></script>
+    <script type="text/javascript">
+        function Item(name, checked) {
+            this.name = ko.observable(name);
+            this.checked = ko.observable(checked || false);
+        }
+        function ViewModel() {
+            this.toggleAll = ko.observable(false);
+            this.items = ko.observableArray([
+            new Item("Foo 1"),
+            new Item("Foo 2", true),
+            new Item("Foo 3")
+            ]);
+
+            this.toggleAll.subscribe(function(newValue) {
+            this.items().forEach(function(item) {
+                item.checked(newValue);
+            });
+            }, this);
+        }
+    </script>
+</body>
+</html>

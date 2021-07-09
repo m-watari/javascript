@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="content-style-type" content="text/css">
+  <meta http-equiv="content-script-type" content="text/javascript">
+  <script src="../js/require-config.js"></script>
+  <script data-main="../js/list-shuffle-main.js" src="../js/lib/require.js"></script>
+  <link rel="stylesheet" href="../css/common.css">
+  <title>select items using two lists with move controls and reorder items</title>
+</head>
+<body>
+  <section>
+    <h1>select items using two lists with move controls and reorder items</h1>
+
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <select data-bind="options: leftItems, optionsText: 'name', selectedOptions: selectedLeft, optionsAfterRender: bindMoveItemWithDblclick.bind($data)" size="10" multiple="true"></select>
+          </td>
+          <td>
+            <button data-bind="click: moveRight">&gt;&gt;</button>
+            <br />
+            <button data-bind="click: moveLeft">&lt;&lt;</button>
+          </td>
+          <td>
+            <select data-bind="options: rightItems, optionsText: 'name', selectedOptions: selectedRight, optionsAfterRender: bindMoveItemWithDblclick.bind($data)" size="10" multiple="true"></select>
+          </td>
+          <td>
+            <button data-bind="click: moveUp">UP</button>
+            <br />
+            <button data-bind="click: moveDown">DOWN</button>
+          </td>
+        </tr>
+      <tbody>
+    </table>
+  </section>
+</body>
+</html>
