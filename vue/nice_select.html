@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+<style>
+    html, body {
+    font: 13px/18px sans-serif;
+    }
+    select {
+    min-width: 300px;
+    }
+
+    .nice-select {
+        position: relative;
+        z-index:200;
+        -webkit-tap-highlight-color: transparent;
+        background-color: #fff;
+        border: solid 1px #d1d1d1;
+        box-sizing: border-box;
+        clear: both;
+        cursor: pointer;
+        display: block;
+        float: left;
+        color:#a1a1a1;
+        font-family: inherit;
+        font-size: 16px;
+        font-weight: normal;
+        letter-spacing: -.033em;
+        height: 38px;
+        line-height: 35px;
+        outline: none;
+        padding-left: 13px;
+        padding-right: 26px;
+        text-align: left !important;
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        white-space: nowrap;
+        width: 100%;
+    }
+    .nice-select:hover,
+    .nice-select.open {
+        color:#1d62ab;
+        border-color: #1d62ab;
+    }
+
+    .nice-select:after {
+        border-bottom: 2px solid #d1d1d1;
+        border-right: 2px solid #d1d1d1;
+        content: '';
+        display: block;
+        height: 8px;
+        margin-top: -5px;
+        pointer-events: none;
+        position: absolute;
+        right: 13px;
+        top: 50%;
+        -webkit-transform-origin: 66% 66%;
+        -ms-transform-origin: 66% 66%;
+        transform-origin: 66% 66%;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+        -webkit-transition: all 0.15s ease-in-out;
+        transition: all 0.15s ease-in-out;
+        width: 8px;
+    }
+
+    .nice-select:hover:after,
+    .nice-select.open:after {
+        border-color: #1d62ab !important;
+    }
+
+    .nice-select.open:after {
+        -webkit-transform: rotate(-135deg);
+        -ms-transform: rotate(-135deg);
+        transform: rotate(-135deg);
+    }
+
+    .nice-select.open .list {
+        opacity: 1;
+        pointer-events: auto;
+        -webkit-transform: scale(1) translateY(0);
+        -ms-transform: scale(1) translateY(0);
+        transform: scale(1) translateY(0);
+    }
+
+    .nice-select.disabled {
+        border-color: #e7ecf2;
+        color: #90a1b5;
+        pointer-events: none;
+    }
+
+    .nice-select.disabled:after {
+        border-color: #cdd5de;
+    }
+
+    .nice-select .list {
+        background-color: #fff;
+        border: 1px solid #1d62ab;
+        box-sizing: border-box;
+        margin-top: 10px;
+        opacity: 0;
+        max-height: 232px;
+        overflow: hidden;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        padding: 0;
+        pointer-events: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 199;
+        -webkit-transform-origin: 50% 0;
+        -ms-transform-origin: 50% 0;
+        transform-origin: 50% 0;
+        -webkit-transform: scale(0.75) translateY(-21px);
+        -ms-transform: scale(0.75) translateY(-21px);
+        transform: scale(0.75) translateY(-21px);
+        -webkit-transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
+        transition: all 0.2s cubic-bezier(0.5, 0, 0, 1.25), opacity 0.15s ease-out;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-text-size-adjust: none;
+        -moz-text-size-adjust: none;
+        -ms-text-size-adjust: none;
+        -o-text-size-adjust: none;
+        text-size-adjust: none;
+    }
+
+    .nice-select .list:hover .option:not(:hover) {
+        color:#a1a1a1 !important;
+        background-color: transparent !important;
+    }
+
+    .nice-select .option {
+        cursor: pointer;
+        color:#a1a1a1;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 28px;
+        min-height: 27px;
+        letter-spacing: -.033em;
+        list-style: none;
+        outline: none;
+        padding-left: 12px;
+        padding-right: 15px;
+        text-align: left;
+        -webkit-transition: all 0.2s;
+        transition: all 0.2s;
+    }
+
+    .nice-select .option:hover,
+    .nice-select .option.focus,
+    .nice-select .option.selected.focus {
+        color:#fff !important;
+        background-color: #1d62ab !important;
+    }
+
+    .nice-select .option.selected {
+        color:#fff !important;
+        background-color: #1d62ab !important;
+    }
+
+    .nice-select .option.disabled {
+        background-color: transparent;
+        color: #90a1b5;
+        cursor: default;
+    }
+
+    .no-csspointerevents .nice-select .list {
+        display: none;
+    }
+
+    .no-csspointerevents .nice-select.open .list {
+        display: block;
+    }
+
+
+
+    @media only screen and ( min-width: 768px) {
+        .nice-select.nice-select-shadow {
+            -webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+            box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+        }
+        .category_fixed .nice-select.nice-select-shadow {
+            -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+            -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+        }
+    }
+    @media only screen and ( max-width: 767px) {
+        .nice-select .option,
+        .nice-select {
+            font-size: 14px;
+        }
+
+        .nice-select .list {
+            max-height: 218px;
+        }
+
+        .nice-select-over .list:before {
+            position: fixed;
+            right: 3px;
+            top: 3px;
+            content: '';
+            display: block;
+            width: 3px;
+            height: 50%;
+            pointer-events: none;
+            background-color: #d1d1d1;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+        }
+    }
+</style>
+
+    <div id="el"></div>
+    <script type="text/x-template" id="demo-template">
+        <div>
+            <p>Selected: {{ selected }}</p>
+            <niceSelect :options="options" v-model="selected">
+                <option v-for="item in options" :value="item.id" >
+                    {{ item.text }}
+                </option>
+            </niceSelect>
+        </div>
+    </script>
+
+    <script type="text/x-template" id="niceSelect-template">
+        <select>
+            <slot></slot>
+        </select>
+    </script>
+
+<script>
+    Vue.component('niceSelect', {
+        props: ['options', 'value'],
+        template: '#niceSelect-template',
+        mounted: function () {
+            var vm = this
+            console.log("mounted")
+            console.log(this.$el)
+
+            $(this.$el)
+                // init select2
+                // .niceSelect({
+                //     data: this.options
+                // })
+                .val(this.value)
+                .trigger('change')
+                // emit event on change.
+                .on('change', function () {
+                    vm.$emit('input', this.value)
+                })
+
+
+            $(this.$el).val(vm.selected).trigger('change');
+        },
+        watch: {
+            value: function (value) {
+                // update value
+                console.log("watch value")
+                console.log(this.$el)
+                $(this.$el).val(value).trigger('change');
+            },
+            options: function (options) {
+                // update options
+                console.log("watch options")
+                console.log(this.$el)
+                $(this.$el).empty().niceSelect({
+                    data: options
+                })
+            }
+        },
+        destroyed: function () {
+            console.log("destroyed")
+            console.log(this.$el)
+            $(this.$el).off().niceSelect('destroy')
+        }
+    })
+
+    var vm = new Vue({
+        el: '#el',
+        template: '#demo-template',
+        data: {
+            selected: 2,
+            options: [{
+                id: 1,
+                text: 'Hello'
+            },
+            {
+                id: 2,
+                text: 'World'
+            }
+            ]
+        }
+    });
+</script>
+</body>
+</html>
