@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+
+<title>デモページ</title>
+
+</head>
+<body>
+
+<div id="app">
+	<ol>
+		<li>{{ test }}</li>
+	</ol>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+var app = new Vue({
+	el: '#app',
+	data: {
+		test: []
+	},
+	mounted() {
+		fetch('https://jsonplaceholder.typicode.com/todos/1')
+			.then(response => {
+				return response.json();
+                console.log(response);
+			})
+			.then(json => {
+				this.test = json;
+                console.log(json);
+			})
+	}
+})
+</script>
+</body>
+</html>
