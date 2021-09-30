@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <!-- <script src="index.js"></script> -->
+</head>
+
+<body>
+</body>
+<script>
+    var arr = [
+        { id: 1761, date: "2021-07-31", workCode: "0008001", workName: "城北仮設工事（デモデータ）" }
+        , { '2020-02-30': { aaa: 2, memo: 'かきくけこ' } }
+        , { '2020-02-10': { aaa: 3, memo: 'さしすせそ' } }
+        , { '2020-02-05': { aaa: 4, memo: 'たちつてと' } }
+    ];
+    arr.sort(function (a, b) {
+        if (Object.keys(a) < Object.keys(b)) {
+            return -1;
+        } else {
+            return 1;
+        }
+    });
+    console.log(arr);
+</script>
+
+</html>

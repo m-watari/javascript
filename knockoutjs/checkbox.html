@@ -16,6 +16,7 @@
     </form>
     <script type="text/javascript" src="knockout-3.5.1.js"></script>
     <script type="text/javascript">
+    window.onload = function() {
         function Item(name, checked) {
             this.name = ko.observable(name);
             this.checked = ko.observable(checked || false);
@@ -34,6 +35,7 @@
             });
             }, this);
         }
+    };
     </script>
 </body>
 </html>

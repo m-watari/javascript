@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+
+    <script src="knockout-3.5.1.js"></script>
+  </head>
+  <body>
+    <!-- $indexで配列のインデックス値を取得できる（0始まり） -->
+    <!-- $parentで親のコンテキストを取得できる -->
+    <table>
+      <tbody data-bind="foreach: people">
+        <tr>
+            <td>[No.<span data-bind="text: $index() + 1"></span>]</td>
+            <td data-bind="text: lastName"></td>
+            <td data-bind="text: firstName"></td>
+            <td>
+                <a href="#" data-bind="click: $parent.remove">削除</a>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+    <button data-bind="click: change">追加</button>
+  </body>
+  <script>
+    function viewModel() {
+        var self = this;
+
+        // observableArrayをセット（配列で初期化している）
+        self.people = ko.observableArray([
+            { firstName: '太郎', lastName: 'ほげ' },
+            { firstName: '一郎', lastName: 'ふー' },
+            { firstName: '三郎', lastName: 'ほげほげ' }
+        ]);
+
+        // 追加が押されたら要素追加！
+        self.change = function () {
+            self.people.push(
+                { firstName: '追加分', lastName: '私は' }
+            );
+        };
+        // 削除が押されたら要素削除！
+        self.remove = function () {
+            self.people.remove(this);
+        };
+    }
+
+ko.applyBindings(new viewModel());
+    </script>
+</html>

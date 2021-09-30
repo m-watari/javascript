@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/nice-select.css">
+</head>
+<body>
+    <select class="ignore">
+        <option value="1">Some option</option>
+        <option value="2">Another option</option>
+        <option value="3" disabled="">A disabled option</option>
+        <option value="4">Potato</option>
+      </select>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/jquery.nice-select.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('select').niceSelect()
+        });
+    </script>
+</body>
+</html>

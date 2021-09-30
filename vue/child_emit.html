@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>親子間でのデータ双方向binding</title>
+</head>
+<body>
+    <div id="app">
+        <p>Parent: {{message}}</p>
+        <input type="text" v-model="message"></input>
+        <child :message="message" @input="onInputChild"></child>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const Child = {
+            props: {
+                message: String
+            },
+            template: 
+                '<div>' + 
+                '<p>Child: {{message}}</p>' + 
+                '<input type="text" :value="message" @change="onChangeInput"/>' + 
+                '</div>',
+            methods: {
+                onChangeInput(event) {
+                this.commitChange(event.target.value)
+                },
+                commitChange(newValue) {
+                this.$emit('input', newValue)
+                }
+            }
+            }
+
+            new Vue({
+            el: '#app',
+            components: {
+                'child': Child
+            },
+            data() {
+                return {
+                message: 'init'
+                }
+            },
+            methods: {
+                onInputChild(newMessage) {
+                this.message = newMessage
+                }
+            }
+            })
+    </script>
+</body>
+</html>
