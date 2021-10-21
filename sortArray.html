@@ -7,13 +7,13 @@
 </head>
 
 <body>
+    <div id="app"></div>
 </body>
 <script>
     var arr = [
-        { id: 1761, date: "2021-07-31", workCode: "0008001", workName: "城北仮設工事（デモデータ）" }
-        , { '2020-02-30': { aaa: 2, memo: 'かきくけこ' } }
-        , { '2020-02-10': { aaa: 3, memo: 'さしすせそ' } }
-        , { '2020-02-05': { aaa: 4, memo: 'たちつてと' } }
+        { aaa: 2, memo: 'かきくけこ' },
+        { aaa: 3, memo: 'さしすせそ' },
+        { aaa: 4, memo: 'たちつてと' }
     ];
     arr.sort(function (a, b) {
         if (Object.keys(a) < Object.keys(b)) {
@@ -23,6 +23,18 @@
         }
     });
     console.log(arr);
+    let app = document.getElementById("app");
+    // app.innerHTML = JSON.stringify(arr);
+    let list = '';
+    app.innerHTML = displayJson(arr, list);
+    
+
+    function displayJson(arr, list){
+        for (let i = 0; i < arr.length; i++){
+            list += '<li>' + arr[i].memo + '</li>';
+        }
+        return list;
+    }
 </script>
 
 </html>
