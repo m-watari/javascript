@@ -21,5 +21,8 @@
   "homepage": "https://github.com/m-watari/javascript#readme",
   "devDependencies": {
     "jest": "^27.0.4"
+  },
+  "dependencies": {
+    "moment": "^2.29.1"
   }
 }

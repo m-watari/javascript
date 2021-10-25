@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./js/moment.js"></script>
+    <script src="./js/moment-with-locales.js"></script>
+ <script>
+    moment.locale( 'ja' );
+    var now = moment();
+    console.log(now.format('YYYY年MM月DD日')); // 現在の年月日
+    var date = '2017/02/11 20:25:42'; 
+    console.log(moment(date, 'YYYY/MM/DD HH:mm:S').fromNow());
+ </script>
+</body>
+</html>
