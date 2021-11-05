@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+
+<title>デモページ</title>
+
+</head>
+<body>
+
+<div id="app">
+	<ol>
+		<li>{{ number1.toLocaleString() }}</li>
+        <li>{{ number2.toLocaleString() }}</li>
+        <li>{{ number3.toLocaleString() }}</li>
+        <li>{{ number4.toLocaleString() }}</li>
+	</ol>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+var app = new Vue({
+	el: '#app',
+	data: {
+		number1: 1000,
+        number2: 34560,
+        number3: -1000,
+        number4: -13450
+	}
+})
+</script>
+</body>
+</html>
