@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            cursor: pointer;
+            border: 1px solid;
+        }
+    </style>
+    <ul>
+        <li id="test1" draggable="true">リスト1</li>
+        <li id="test2" draggable="true">リスト2</li>
+        <li id="test3" draggable="true">リスト3</li>
+    </ul>
+    <script>
+        document.querySelectorAll('li').forEach(element => {
+            element.ondragstart = function () {
+                event.dataTransfer.setData('text/plain', event.target.id);
+            };
+
+            element.ondragover = function () {
+                event.preventDefault();
+                this.style.borderTop = '3px solid';
+            };
+
+            element.ondragleave = function () {
+                this.style.borderTop = "";
+            };
+
+            element.ondrop = function () {
+                event.preventDefault();
+                let id = event.dataTransfer.getData('text');
+                let element_drag = document.getElementById(id);
+                this.parentNode.insertBefore(element_drag, this);
+                this.style.borderTop = '';
+                console.log('id', id)
+            };
+        });
+    </script>
+</body>
+
+</html>
