@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!-- recaptcha読み込み -->
+   <script src="https://www.google.com/recaptcha/api.js?hl=ja"></script>
+   <title>Document</title>
+</head>
+<body>
+   <!-- tokenが設置される -->
+   <input type="hidden" id="g-recaptcha-response">
+   <!-- recaptchaチェックボックス表示 -->
+	<div class="g-recaptcha" data-sitekey="RECAPTCHA_KEY" data-callback="verifyCallback" data-expired-callback="expiredCallback"></div>
+   <p>
+      <input type="checkbox" id="agreement" class="" onclick="sendButtonActivation()"></p>
+		<label for="agreement" class="fsMid" ></label>
+   </p>
+   
+   <script>
+      // reCAPTCHAチェック時の実行
+      let recapcha_check = false;
+      function verifyCallback(response) {
+         if(response) recapcha_check = true;
+         sendButtonActivation()
+      };
+
+      // reCAPTCHAチェック後一定時間経過後チェック解除時の実行
+      function expiredCallback(response) {
+         if(!response) recapcha_check = false;
+         sendButtonActivation()
+      };
+
+      // ポリシー同意時の実行
+      function sendButtonActivation() {
+         agreement = document.getElementById('agreement').checked;
+
+         target = document.getElementById("send_button");
+         if (agreement == true && recapcha_check == true) {
+            target.innerHTML = '送信';
+            target.classList.remove('typeDisable');
+         } else {
+            target.innerHTML = '同意してください';
+            target.classList.add('typeDisable');
+         }
+      }
+   </script>
+</body>
+</html>
