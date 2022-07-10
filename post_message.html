@@ -7,34 +7,23 @@
    <title>Document</title>
 </head>
 <body>
-   <iframe id="hoge" src="https://test.com"></iframe>
-   <script>
-      // // iframe要素のウィンドウを取得する
-      var targetWindow = document.getElementById( "hoge" ).contentWindow ;	// Window
+   <!-- 外部サイトへメッセージを投げるためのiframe -->
+<iframe id="ifrm" src="https://test.com/post_message_receive.html" style="display:none;"></iframe>
 
-      // // このウィンドウから、相手のウィンドウ(targetWindow)に向けてメッセージを送信する (オリジンを指定)
-      targetWindow.postMessage( "Hello!!", "https://test.com" ) ;
+<script type="text/javascript">
+// windowロードイベント
+window.onload = function() {
+    // iframeのwindowオブジェクトを取得
+    var ifrm = document.getElementById('ifrm').contentWindow;
+    // 外部サイトにメッセージを投げる
+    ifrm.postMessage("HELLO!", 'https://test.com');
+};
 
-
-      // コールバック関数
-      // var myFunction = function ( event ) {
-      //    // 送信側のオリジン
-      //    var origin = event.origin ;
-
-      //    // 信頼できるオリジン以外からのメッセージを無視する (重要)
-      //    if( origin !== "https://test.com" ) return false ;
-
-      //    // 送られてきたメッセージ
-      //    var message = event.data ;	// "Hello!!"
-      //    console.log( "メッセージを受信しました!! → " + message ) ;
-      // }
-
-      // // イベントを設定する (addEventListener)
-      // addEventListener( "message", myFunction ) ;
-
-
-
-
+// メッセージ受信イベント
+window.addEventListener('message', function(event) {
+    alert(event.data); //'WORLD!'
+}, false);
+</script>
    </script>
 </body>
 </html>
