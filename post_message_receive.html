@@ -7,16 +7,16 @@
    <title>Document</title>
 </head>
 <body>
-   <div id="message">test</div>
+   <div id="get-message">test</div>
    <script type="text/javascript">
-      // メッセージ受信イベント
+      // メッセージ受信
       window.addEventListener('message', function(event) {
          // id="message"のdivに受信したメッセージを表示
-         document.getElementById('message').innerHTML = event.data;
+         document.getElementById('get-message').innerHTML = event.data;
          // messegeをcookieに保存
-         document.cookie = "message=" + event.data;
+         document.cookie = "getMessage=" + event.data;
           // メッセージ送信元のサイトに返答する
-          event.source.postMessage('WORLD!', event.origin);
+          event.source.postMessage('ok', event.origin);
       }, false);
     </script>
 </body>

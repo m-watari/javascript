@@ -8,15 +8,14 @@
 </head>
 <body>
 <!-- 外部サイトへメッセージを投げるためのiframe -->
-<iframe id="ifrm" src="https://match.sam-reco.com/post_message_receive.html"></iframe>
+<iframe id="message" src="https://test.com/post_message_receive.html"></iframe>
 
 <script type="text/javascript">
-// windowロードイベント
 window.onload = function() {
     // iframeのwindowオブジェクトを取得
-    var ifrm = document.getElementById('ifrm').contentWindow;
+    var message = document.getElementById('message').contentWindow;
     // 外部サイトにメッセージを投げる
-    ifrm.postMessage("HELLO!", 'https://match.sam-reco.com');
+    message.postMessage("test", 'https://test.com');
 };
 
 // メッセージ受信イベント
