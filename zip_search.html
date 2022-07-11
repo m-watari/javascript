@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+   <div id="Inquiry">
+      <form id="mailform" method="post" action="" onSubmit="">
+         <p>〒郵便番号<br><input name="郵便番号 (必須)" type="text" class="box-txt b-w100r" onKeyUp="AjaxZip3.zip2addr(this,'','都道府県 (必須)','市区町村 (必須)');"></p>
+         <p>都道府県<br><input name="都道府県 (必須)" type="text" class="box-txt b-w100r"></p>
+         <p>市区町村<br><input name="市区町村 (必須)" type="text" class="box-txt b-w100r"></p>
+         番地・建物名<br><input name="番地・建物名 (必須)" type="text" class="box-txt b-w100r">
+         <p><button type='submit' class="btn-submit">送信</button></p>
+      </form>    
+   </div>
+   <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+    <script>
+        $(document).on('keyup change', '[name="郵便番号 (必須)"]', function(e){
+            if(!([8, 46].includes(e.keyCode))){
+                let _val = $(this).val().replace(/[^0-9]/g, '');
+                if(_val.length > 2) _val = _val.slice(0, 3) + '-' + _val.slice(3, 7);
+                $(this).val(_val);
+            }
+        });
+    </script>
+</body>
+</html>

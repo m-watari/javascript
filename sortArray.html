@@ -10,6 +10,18 @@
     <div id="app"></div>
 </body>
 <script>
+    const data2 = {
+    "action": "login",
+    "token": "{\"token\":\"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiZTUxMDEyYmYtNTY4Zi00MWJhLTg5NTktMWYyZDZkM2Q3YzhmIiwiZmlyc3RuYW1lIjoiTWFtb3J1IiwibGFzdG5hbWUiOiJXYXRhcmkiLCJlbWFpbCI6Im13YXRhcmlAb2JpLnNnIn0sImlhdCI6MTY1NjY2NTE2OSwiZXhwIjoxNjU2NzUxNTY5fQ.kUD7oyPDWrEgCJ2DsBGnrDIeqWuII4t88-0VywY7s1mYYiH2aSHBkpiJ-6-Q2tgaHpD9aXPqjYdJK_iibpykLQ\",\"expires\":1656751569,\"language\":\"ja\"}"
+}
+
+// data2のtokenのtokenを取得
+const token = JSON.parse(data2.token);
+// const token = data2.token;
+console.log('data2.token!!', token.token)
+//data2のexpiresを取得
+const expires = data2.expires;
+console.log('data2.expires!!', token.expires)
     var arr = [
         { aaa: 2, memo: 'かきくけこ' },
         { aaa: 3, memo: 'さしすせそ' },
@@ -35,6 +47,9 @@
         }
         return list;
     }
+
+    const data = {"action": "logout", "site": [{"name": "wf", "src": "undefined/dev2/auth.html", "url": undefined}, {"name": "dp", "src": "undefined/auth", "url": undefined}]}
+    console.log('data', data.action);
 </script>
 
 </html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+   <div id="message">test</div>
+   <script type="text/javascript">
+      // メッセージ受信イベント
+      window.addEventListener('message', function(event) {
+         // id="message"のdivに受信したメッセージを表示
+         document.getElementById('message').innerHTML = event.data;
+         // messegeをcookieに保存
+         document.cookie = "message=" + event.data;
+          // メッセージ送信元のサイトに返答する
+          event.source.postMessage('WORLD!', event.origin);
+      }, false);
+    </script>
+</body>
+</html>

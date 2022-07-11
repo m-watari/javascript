@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+<!-- 外部サイトへメッセージを投げるためのiframe -->
+<iframe id="ifrm" src="https://match.sam-reco.com/post_message_receive.html"></iframe>
+
+<script type="text/javascript">
+// windowロードイベント
+window.onload = function() {
+    // iframeのwindowオブジェクトを取得
+    var ifrm = document.getElementById('ifrm').contentWindow;
+    // 外部サイトにメッセージを投げる
+    ifrm.postMessage("HELLO!", 'https://match.sam-reco.com');
+};
+
+// メッセージ受信イベント
+// window.addEventListener('message', function(event) {
+//     alert(event.data); //'WORLD!'
+// }, false);
+</script>
+   </script>
+</body>
+</html>
