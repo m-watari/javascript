@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+   <script>
+
+// test_urlにtest_url2が含まれるかどうかをチェックする
+      const test_url = 'google.com';
+      const test_url2 = 'google.com';
+      const test_url3 = 'yahoo.co.jp';
+
+      const acceptsbleOrigins = (test_url2 || '').split(',');
+      console.log('acceptsbleOrigins', acceptsbleOrigins);
+
+      console.log('acceptsbleOrigins.indexOf(test_url)', acceptsbleOrigins.indexOf(test_url));
+
+      // if (acceptsbleOrigins.indexOf(test_url) === -1 && acceptsbleOrigins.indexOf(test_url3) === -1) {
+      //    console.log('test_url is not acceptable');
+      // } else {
+      //    console.log('test_url is acceptable');
+      // }
+
+      // return if test_url does not contain either test_url2 to test_url3
+      if (acceptsbleOrigins.indexOf(test_url) === -1 && acceptsbleOrigins.indexOf(test_url3) === -1) {
+         console.log('return');
+      } else {
+         console.log('continue');
+      }
+
+      const e = {
+         origin: 'yahoo.com',
+         data: {
+            action: 'logout',
+            rate: '1.00',
+            date: '2020-01-01'
+         }
+      }
+      console.log('e', e.origin);
+      const data = e.data || {};
+      console.log('data', data.action);
+      if (!/google\.com|yahoo\.com/.test(e.origin) || !data.action) {
+      // if (/portal\.myforex\.com/.test(e.origin) === false && /dp\.myforex\.com/.test(e.origin) === false || !data.action) {
+         console.log('return2');
+      } else {
+         console.log('continue2');
+      }
+
+
+
+
+   </script>
+</body>
+</html>
