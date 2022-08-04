@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // idから要素を取得
+    const arr = [
+      { id: 1, name: 'Apple', active: false },
+      { id: 2, name: 'Banana', active: true },
+      { id: 3, name: 'Orange', active: true },
+    ];
+    const result = arr.find((v) => v.active);
+    console.log(result); // => { id: 2, name: 'Banana', active: true }
+
+    // オブジェクトを検索
+    const obj = {
+      test1: { name: 'apple', price: 80 },
+      test2: { name: 'banana', price: 120 },
+      test3: { name: 'orange', price: 1800 },
+    };
+
+    // オブジェクトを配列に変換しないと検索できない
+    const arr2 = Object.entries(obj);
+
+    // キーワードで検索
+    const result2 = arr2.find(([id, data]) => data.name === 'banana');
+    console.log(result2); // => ['zqiyjo2RgeZ', { name: 'banana', price: 120 }]
+
+  </script>
+</body>
+</html>
