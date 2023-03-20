@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>追いつく時間の計算</title>
+    <script>
+        function calculateTime() {
+            const pSpeed = parseFloat(document.getElementById("pSpeed").value);
+            const qSpeed = parseFloat(document.getElementById("qSpeed").value);
+            const qDepartureTime = document.getElementById("qDepartureTime").value;
+            const breakTime = parseFloat(document.getElementById("breakTime").value);
+
+            const qDeparture = new Date(`1970-01-01T${qDepartureTime}:00`);
+
+            const pTotalTravelTime = (2 * 60 + 30) + breakTime;
+            const pTotalDistance = (pTotalTravelTime / 60) * pSpeed;
+
+            const timeDifference = (pTotalDistance - (qSpeed * (2 * 60 + 15) / 60)) / (qSpeed - pSpeed);
+            const timeInMinutes = timeDifference * 60;
+            const catchUpTime = new Date(qDeparture.getTime() + timeInMinutes * 60 * 1000);
+
+            const hours = catchUpTime.getHours();
+            const minutes = catchUpTime.getMinutes();
+
+            document.getElementById("result").innerHTML = `QがPに追いつくのは、${hours}時${minutes}分です。`;
+        }
+    </script>
+</head>
+<body>
+    <h1>追いつく時間の計算</h1>
+    <div>
+        <label for="pSpeed">Pの速度(km/h): </label>
+        <input type="number" id="pSpeed" value="4.8">
+    </div>
+    <div>
+        <label for="breakTime">Pの休憩時間(分): </label>
+        <input type="number" id="breakTime" value="45">
+    </div>
+    <div>
+        <label for="qDepartureTime">Qの出発時間: </label>
+        <input type="time" id="qDepartureTime" value="12:06">
+    </div>
+    <div>
+        <label for="qSpeed">Qの速度(km/h): </label>
+        <input type="number" id="qSpeed" value="9">
+    </div>
+    <button onclick="calculateTime()">計算</button>
+    <p id="result"></p>
+</body>
+</html>

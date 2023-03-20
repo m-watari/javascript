@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>My Page</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div id="form-container"></div>
+
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var formConfig = {
+        "title": {
+          "type": "text",
+          "label": "Title"
+        },
+        "description": {
+          "type": "textarea",
+          "label": "Description"
+        },
+        "category": {
+          "type": "select",
+          "label": "Category",
+          "options": {
+            "1": "Books",
+            "2": "Movies",
+            "3": "Music",
+            "4": "Games",
+            "5": "Sports"
+          }
+        },
+        "tags": {
+          "type": "select",
+          "label": "Tags",
+          "options": {
+            "1": "Action",
+            "2": "Comedy",
+            "3": "Drama",
+            "4": "Horror",
+            "5": "Romance",
+            "6": "Thriller"
+          },
+          "multiple": true
+        }
+      };
+
+      var formHtml = '';
+      for (var field in formConfig) {
+        var fieldConfig = formConfig[field];
+        var fieldHtml = '';
+        if (fieldConfig.type === 'text') {
+          fieldHtml = '<input type="text" name="' + field + '" id="' + field + '" />';
+        } else if (fieldConfig.type === 'textarea') {
+          fieldHtml = '<textarea name="' + field + '" id="' + field + '"></textarea>';
+        } else if (fieldConfig.type === 'select') {
+          var optionsHtml = '';
+          for (var value in fieldConfig.options) {
+            var label = fieldConfig.options[value];
+            optionsHtml += '<option value="' + value + '">' + label + '</option>';
+          }
+          var selectHtml = '<select name="' + field + '" id="' + field + '"';
+          if (fieldConfig.multiple) {
+            selectHtml += ' multiple';
+          }
+          selectHtml += '>' + optionsHtml + '</select>';
+          fieldHtml = selectHtml;
+        }
+        formHtml += '<div class="form-group"><label for="' + field + '">' + fieldConfig.label + '</label>' + fieldHtml + '</div>';
+      }
+      $('#form-container').html(formHtml);
+
+      $('.select').select2({
+        theme: 'bootstrap',
+        minimumResultsForSearch: Infinity,
+      });
+    });
+  </script>
+</body>
+</html>
